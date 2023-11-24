@@ -106,6 +106,8 @@ func (e *DefaultExecutor) genOpFromSchema(file, stage string, config schema.YipC
 	results := []*op{}
 
 	currentStages := config.Stages[stage]
+	e.logger.Infof("[VICENTE DBG] Stage: %s\n", stage)
+	e.logger.Infof("[VICENTE DBG] currentStages: %+v\n", currentStages)
 
 	prev := ""
 	for i, st := range currentStages {
@@ -170,6 +172,7 @@ func (e *DefaultExecutor) dirOps(stage, dir string, fs vfs.FS, console plugins.C
 				return nil
 			}
 
+			e.logger.Infof("[VICENTE DBG] loading path: %s\n", path)
 			config, err := schema.Load(path, fs, schema.FromFile, e.modifier)
 			if err != nil {
 				return err
